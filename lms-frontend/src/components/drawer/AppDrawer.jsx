@@ -10,11 +10,25 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import WifiTetheringErrorIcon from '@mui/icons-material/WifiTetheringError';
+import SwapCallsIcon from '@mui/icons-material/SwapCalls';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Box } from '@mui/material';
 
 const drawerWidth = 240;
 
+
 function AppDrawer(props) {
+  const menuList=[{'name':'Dashboard','icon':DeveloperBoardIcon}, {'name':'Recruitment','icon':ZoomInIcon}, {'name':'Onboarding','icon':AssessmentIcon},
+   {'name':'Requirement','icon':WifiTetheringErrorIcon},{'name':'Assignment','icon':SwapCallsIcon},{'name':'Settings','icon':SettingsIcon}];
+
+   function handleSelectedMenu(name){
+    console.log(name);
+   }
+   
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -43,30 +57,21 @@ function AppDrawer(props) {
         <Toolbar />
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
+          {menuList.map((text, index) => (
+            
+            <ListItem key={index} disablePadding >
+              <ListItemButton onClick={handleSelectedMenu(text)} >
                 <ListItemIcon>
-                  {/* {index % 2 === 0 ? <Icon /> : <MailIcon />} */}
+                  {<text.icon/>}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={text.name} />
               </ListItemButton>
             </ListItem>
+            
           ))}
         </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        {/* <Divider /> */}
+        
       </Drawer>
       </Box>
       );
