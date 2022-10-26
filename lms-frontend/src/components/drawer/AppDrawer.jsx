@@ -30,19 +30,10 @@ function AppDrawer(props) {
    }
    
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{display: 'flex', width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <Drawer
+        
         sx={{
           width: drawerWidth,
           flexShrink: 0,
