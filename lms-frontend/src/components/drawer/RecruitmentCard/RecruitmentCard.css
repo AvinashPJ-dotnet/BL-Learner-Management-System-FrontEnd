@@ -1,0 +1,61 @@
+
+.cardDiv{
+    margin-top: 65px;
+    width: 1098px;
+    background-color:#edf8f9;
+    height: 600px;
+    margin-left: 200px;
+}
+
+.buttonDiv{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 65px;
+    background-color: #edf8f9;
+    align-items: center;
+}
+
+
+#logo-search {
+    position: relative;
+    /* padding: 0px 140px 10px 60px; */
+    padding: 0px 545px 0px 57px;
+  }
+  
+  #logo {
+    position: absolute;
+    color: #00000096;
+    padding: 5px 5px;
+    height: 31px;
+  }
+  
+  .search {
+      background-color: white;
+    padding: 0px 30px;
+    height: 30px;
+    width: 400px;
+    border: 1px solid #9e9e9e;
+    border-radius: 21px;
+}
+  
+.uploadIconDiv{
+    border-radius: 48%;
+    border: 1px solid grey;
+    height: 26px;
+    align-items: center;
+    display: flex;
+    background-color: blue;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.dividerContent{
+    display: flex;
+    flex-direction: row;
+}
+
+.heading{
+    padding: 0px 19px 0px 100px;
+    cursor: pointer;
+}

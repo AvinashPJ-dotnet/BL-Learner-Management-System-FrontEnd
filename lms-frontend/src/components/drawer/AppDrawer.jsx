@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React } from "react";
 import {
   Drawer,
   CssBaseline,
@@ -9,32 +9,34 @@ import {
   createTheme,
   ThemeProvider,
   styled,
-  Divider,Typography
+  Divider,
+  Typography,
 } from "@mui/material";
-import PropTypes from 'prop-types';
-import TreeView from '@mui/lab/TreeView';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import TreeItem from '@mui/lab/TreeItem';
-import ComputerOutlinedIcon from '@mui/icons-material/ComputerOutlined';
-import ZoomInOutlinedIcon from '@mui/icons-material/ZoomInOutlined';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import WifiTetheringIcon from '@mui/icons-material/WifiTethering';
-import  { treeItemClasses } from '@mui/lab/TreeItem';
-import SwapCallsIcon from '@mui/icons-material/SwapCalls';
-import SettingsIcon from '@mui/icons-material/Settings';
-import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
+import PropTypes from "prop-types";
+import TreeView from "@mui/lab/TreeView";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import TreeItem from "@mui/lab/TreeItem";
+import ComputerOutlinedIcon from "@mui/icons-material/ComputerOutlined";
+import ZoomInOutlinedIcon from "@mui/icons-material/ZoomInOutlined";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import WifiTetheringIcon from "@mui/icons-material/WifiTethering";
+import { treeItemClasses } from "@mui/lab/TreeItem";
+import SwapCallsIcon from "@mui/icons-material/SwapCalls";
+import SettingsIcon from "@mui/icons-material/Settings";
+import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
 
 const Theme = createTheme({
   components: {
     MuiAppBar: {
       styleOverrides: {
         root: {
-          height: "65px",
+          height: "64px",
           display: "flex",
           justifyContent: "center",
           alignItems: "flex-end",
           backgroundColor: "white",
+          boxShadow: "none",
         },
       },
     },
@@ -43,6 +45,13 @@ const Theme = createTheme({
         root: {
           margin: "30px",
           cursor: "pointer",
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          borderColor: "#f3f5f7",
         },
       },
     },
@@ -63,22 +72,22 @@ const StyledTreeItemRoot = styled(TreeItem)(({ theme }) => ({
   [`& .${treeItemClasses.content}`]: {
     color: theme.palette.text.secondary,
     paddingRight: theme.spacing(1),
-    padding:theme.spacing(1),
+    padding: theme.spacing(1),
     fontWeight: theme.typography.fontWeightMedium,
-    '&.Mui-expanded': {
+    "&.Mui-expanded": {
       fontWeight: theme.typography.fontWeightRegular,
     },
-    '&:hover': {
+    "&:hover": {
       backgroundColor: theme.palette.action.focusOpacity,
     },
-    '&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused': {
+    "&.Mui-focused, &.Mui-selected, &.Mui-selected.Mui-focused": {
       backgroundColor: "#f0f4c3",
-      color: 'var(--tree-view-color)',
-      borderRight:"3px solid #7F961E"
+      color: "var(--tree-view-color)",
+      borderRight: "3px solid #7F961E",
     },
     [`& .${treeItemClasses.label}`]: {
-      fontWeight: 'inherit',
-      color: 'inherit',
+      fontWeight: "inherit",
+      color: "inherit",
     },
   },
   [`& .${treeItemClasses.group}`]: {
@@ -102,23 +111,22 @@ function StyledTreeItem(props) {
   return (
     <StyledTreeItemRoot
       label={
-        <Box sx={{ display: 'flex', alignItems: 'center', p: 0.5, pr: 0 }}>
-          <Box component={LabelIcon} 
-          color="inherit"
-           sx={{ mr: 1 }} />
-          <Typography variant="body2" sx={{ fontWeight: 'inherit', flexGrow: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", p: 0.5, pr: 0 }}>
+          <Box component={LabelIcon} color="inherit" sx={{ mr: 1 }} />
+          <Typography
+            variant="body2"
+            sx={{ fontWeight: "inherit", flexGrow: 1 }}
+          >
             {labelText}
           </Typography>
-          <Typography variant="caption" 
-          color="inherit"
-          >
+          <Typography variant="caption" color="inherit">
             {labelInfo}
           </Typography>
         </Box>
       }
       style={{
-        '--tree-view-color': color,
-        '--tree-view-bg-color': bgColor,
+        "--tree-view-color": color,
+        "--tree-view-bg-color": bgColor,
       }}
       {...other}
     />
@@ -135,10 +143,9 @@ StyledTreeItem.propTypes = {
 
 function AppDrawer(props) {
   return (
-   
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <ThemeProvider theme={Theme}>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
+      <ThemeProvider theme={Theme}>
         <AppBar
           position="fixed"
           sx={{
@@ -150,57 +157,85 @@ function AppDrawer(props) {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
           </Tooltip>
         </AppBar>
-        </ThemeProvider>
-        <Drawer
-          sx={{
+      {/* </ThemeProvider> */}
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open="true"
+            boxSizing: "border-box",
+          },
+        }}
+        variant="persistent"
+        anchor="left"
+        open="true"
+      >
+        <DrawerHeader />
+        <Divider />
+        <TreeView
+          aria-label="gmail"
+          defaultCollapseIcon={<ArrowDropDownIcon />}
+          defaultExpandIcon={<ArrowRightIcon />}
+          defaultEndIcon={<div style={{ width: 24 }} />}
+          sx={{ height: 264, flexGrow: 1, maxWidth: 400, overflowY: "auto" }}
         >
-          <DrawerHeader />
-          <Divider />
-          <TreeView
-      aria-label="gmail"
-      defaultCollapseIcon={<ArrowDropDownIcon />}
-      defaultExpandIcon={<ArrowRightIcon />}
-      defaultEndIcon={<div style={{ width: 24 }} />}
-      sx={{ height: 264, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
-    >
-      <StyledTreeItem nodeId="1" labelText="Dashboard" labelIcon={ComputerOutlinedIcon} color="#7F961E"/>
-      <StyledTreeItem nodeId="2" labelText="Recruitment" labelIcon={ZoomInOutlinedIcon} color="#7F961E" />
-      <StyledTreeItem nodeId="3" labelText="Onboarding" labelIcon={AssessmentIcon} color="#7F961E"/>
-      <StyledTreeItem nodeId="4" labelText="Requirement" labelIcon={WifiTetheringIcon} color="#7F961E"/>
-      <StyledTreeItem nodeId="5" labelText="Assignment" labelIcon={SwapCallsIcon} color="#7F961E"/>
-      <StyledTreeItem nodeId="6" labelText="Settings" labelIcon={SettingsIcon} color="#7F961E">
-      <StyledTreeItem
-          nodeId="7"
-          labelText="Configuration"
-          labelIcon={SubdirectoryArrowRightIcon}
-          color="#7F961E"
-          bgColor="#f0f4c3"
-        />
-        <StyledTreeItem
-          nodeId="8"
-          labelText="Fellowship"
-          labelIcon={SubdirectoryArrowRightIcon}
-          color="#7F961E"
-          // bgColor="#fcefe3"
-        />
-        </StyledTreeItem>
+          <StyledTreeItem
+            nodeId="1"
+            labelText="Dashboard"
+            labelIcon={ComputerOutlinedIcon}
+            color="#7F961E"
+          />
+          <StyledTreeItem
+            nodeId="2"
+            labelText="Recruitment"
+            labelIcon={ZoomInOutlinedIcon}
+            color="#7F961E"
+          />
+          <StyledTreeItem
+            nodeId="3"
+            labelText="Onboarding"
+            labelIcon={AssessmentIcon}
+            color="#7F961E"
+          />
+          <StyledTreeItem
+            nodeId="4"
+            labelText="Requirement"
+            labelIcon={WifiTetheringIcon}
+            color="#7F961E"
+          />
+          <StyledTreeItem
+            nodeId="5"
+            labelText="Assignment"
+            labelIcon={SwapCallsIcon}
+            color="#7F961E"
+          />
+          <StyledTreeItem
+            nodeId="6"
+            labelText="Settings"
+            labelIcon={SettingsIcon}
+            color="#7F961E"
+          >
+            <StyledTreeItem
+              nodeId="7"
+              labelText="Configuration"
+              labelIcon={SubdirectoryArrowRightIcon}
+              color="#7F961E"
+              bgColor="#f0f4c3"
+            />
+            <StyledTreeItem
+              nodeId="8"
+              labelText="Fellowship"
+              labelIcon={SubdirectoryArrowRightIcon}
+              color="#7F961E"
+              // bgColor="#fcefe3"
+            />
+          </StyledTreeItem>
         </TreeView>
-        </Drawer>
-      </Box>
+      </Drawer>
+      </ThemeProvider> 
+    </Box>
   );
 }
 
 export default AppDrawer;
-
-
-
