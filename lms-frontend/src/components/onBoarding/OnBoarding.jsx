@@ -10,7 +10,9 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "./OnBoarding.css";
-import { Card } from "@material-ui/core";
+// import { Card } from "@material-ui/core";
+import Card from '@mui/material/Card';
+
 
 const theme = createTheme({
   components: {

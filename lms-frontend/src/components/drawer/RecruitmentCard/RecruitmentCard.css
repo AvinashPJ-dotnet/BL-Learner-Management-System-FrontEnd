@@ -45,7 +45,7 @@
     height: 26px;
     align-items: center;
     display: flex;
-    background-color: blue;
+    background-color: rgb(28, 122, 230);
     margin-right: 10px;
     cursor: pointer;
 }
@@ -59,3 +59,50 @@
     padding: 0px 19px 0px 100px;
     cursor: pointer;
 }
+
+.detailCardDiv{
+    margin-left: 63px;
+    margin-top: 18px;
+    display: flex;
+    flex-direction: row;
+}
+
+.detailsCard{
+    width: 225px;
+    height: 70px;
+    margin-right: 15px;
+    border-left: 3px solid #7F961E;
+    border-radius: 8px;
+    margin-left: 5px;
+
+}
+
+.cardContent{
+    position: absolute;
+    margin: -74px 68px;
+}
+
+.name{
+    margin: 3px 0px 2px 0px;
+    font-size: 14px;
+    font-weight: 550;
+    color:  rgb(66, 66, 66);
+}
+
+.mobile{
+    font-size: xx-small;
+    color: rgb(78, 78, 78);
+    margin: 2px 0px 1px 0px;
+}
+
+.email{
+    font-size: xx-small;
+    color:rgb(78, 78, 78);
+    margin: 1px 0px 2px 0px;
+}
+
+.phoneDiv{
+    display: flex;
+    flex-direction: row;
+}
+
