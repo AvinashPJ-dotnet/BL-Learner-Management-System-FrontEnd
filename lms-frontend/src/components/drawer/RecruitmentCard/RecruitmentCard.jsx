@@ -7,6 +7,7 @@ import {
   Tab,
   Card,
   Avatar,
+  Popover,
 } from "@mui/material";
 import React from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -15,6 +16,7 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "./RecruitmentCard.css";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
+import DisplayCard from "../../DisplayCard/DisplayCard";
 
 const theme = createTheme({
   components: {
@@ -151,10 +153,23 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(
 
 function RecruitmentCard(props) {
   const [value, setValue] = React.useState(0);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
   return (
     <ThemeProvider theme={theme}>
       <div className="cardDiv">
@@ -183,7 +198,8 @@ function RecruitmentCard(props) {
 
         <ThemeProvider theme={avatarTheme}>
           <div className="detailCardDiv">
-            <Card className="detailsCard">
+          
+            <Card className="detailsCard" onClick={handleClick}>
               <Avatar src="/broken-image.jpg" />
               <div className="cardContent">
                 <p className="name">Swati Shinde</p>
@@ -199,8 +215,59 @@ function RecruitmentCard(props) {
                 </ThemeProvider>
               </div>
             </Card>
+            <Popover 
+            anchorOrigin={{
+              vertical: 'center',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+          >
+          <DisplayCard/>
+          </Popover> 
+          
+            <Card className="detailsCard" onClick={handleClick}>
+              <Avatar src="/broken-image.jpg" />
+              <div className="cardContent">
+                <p className="name">Swati Shinde</p>
+                <ThemeProvider theme={phoneIconTheme}>
+                  <div className="phoneDiv">
+                    <PhoneIcon />
+                    <p className="mobile">9876434567 </p>
+                  </div>
+                  <div className="phoneDiv">
+                    <MailIcon />
+                    <p className="email">swati@gmail.com</p>
+                  </div>
+                </ThemeProvider>
+              </div>
+            </Card>
+        
+            <Popover 
+            anchorOrigin={{
+              vertical: 'center',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+          >
+          <DisplayCard/>
+          </Popover> 
+      
 
-            <Card className="detailsCard">
+            <Card className="detailsCard" onClick={handleClick}>
               <Avatar src="/broken-image.jpg" />
               <div className="cardContent">
                 <p className="name">Swati Shinde</p>
@@ -216,23 +283,22 @@ function RecruitmentCard(props) {
                 </ThemeProvider>
               </div>
             </Card>
-
-            <Card className="detailsCard">
-              <Avatar src="/broken-image.jpg" />
-              <div className="cardContent">
-                <p className="name">Swati Shinde</p>
-                <ThemeProvider theme={phoneIconTheme}>
-                  <div className="phoneDiv">
-                    <PhoneIcon />
-                    <p className="mobile">9876434567 </p>
-                  </div>
-                  <div className="phoneDiv">
-                    <MailIcon />
-                    <p className="email">swati@gmail.com</p>
-                  </div>
-                </ThemeProvider>
-              </div>
-            </Card>
+            <Popover 
+            anchorOrigin={{
+              vertical: 'center',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+          >
+          <DisplayCard/>
+          </Popover> 
           </div>
         </ThemeProvider>
       </div>
