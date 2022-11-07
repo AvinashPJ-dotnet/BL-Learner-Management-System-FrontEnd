@@ -9,10 +9,15 @@ class Home extends Component {
         return (
             <div>
                 <AppDrawer/>
+<<<<<<< HEAD
 
                 {/* <RecruitmentCard/> */}
                 {/* <OnBoarding/> */}
 
+=======
+                <RecruitmentCard/>
+                {/* <OnBoarding/> */}
+>>>>>>> dec0de14732cea22a0abeea98550ff851062c6d3
             </div>
         );
     }
