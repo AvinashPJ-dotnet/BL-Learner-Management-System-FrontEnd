@@ -1,0 +1,54 @@
+.displayDetailCardDivR {
+    /* margin-left: 63px; */
+    /* margin-top: 18px; */
+    margin: 20px;
+    display: flex;
+    flex-direction: column; 
+    /* margin-left: 63px;
+    margin-top: 18px;
+    display: flex;
+    flex-direction: row; */
+    /* height: auto; */
+  }
+  
+  .displaydetailsCard{
+      width: 225px;
+      height: 70px;
+      margin-right: 15px; 
+      height: max-content; 
+      width: -webkit-fill-available;
+      border-radius: 8px;
+      margin-left: 5px;
+      margin-top: 85px;
+  }
+  
+  /* .displayCardContent{
+      position: absolute;
+      margin: -84px 1px 68px 81px;
+  } */
+  
+  .candidateName {
+    margin: 19px 0px 12px 0px;
+    font-size: 14px;
+    font-weight: 550;
+    color: rgb(66, 66, 66);
+  }
+  
+  .phoneDiv {
+    display: flex;
+    flex-direction: row;
+    padding-right: 122px;
+  }
+  
+  .mobileNo{
+      font-size: small;
+      color: rgb(78, 78, 78);
+      margin: 2px 0px 1px 0px;
+  }
+  
+  .emailId{
+      font-size: small;
+      color:rgb(78, 78, 78);
+      margin: 1px 0px 2px 0px;
+  }
+  

@@ -1,13 +1,16 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import './App.css';
+
 import Display from "./components/DisplayCard/Display";
-import DisplayCard from "./components/DisplayCard/DisplayCard";
+
+
+import "./App.css";
+
 import RecruitmentCard from "./components/drawer/RecruitmentCard/RecruitmentCard";
 import OnBoarding from "./components/onBoarding/OnBoarding";
 import Home from "./pages/home/Home";
 import NewHired from "./pages/NewHired/NewHired";
 import Recruitment from "./pages/Recruitment";
+
 
 function App() {
   return (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AppDrawer from '../../components/drawer/AppDrawer';
 import RecruitmentCard from '../../components/drawer/RecruitmentCard/RecruitmentCard';
+import OnBoarding from '../../components/onBoarding/OnBoarding';
 
 
 class Home extends Component {
@@ -8,6 +9,9 @@ class Home extends Component {
         return (
             <div>
                 <AppDrawer/>
+                {/* <RecruitmentCard/> */}
+                {/* <OnBoarding/> */}
+
             </div>
         );
     }

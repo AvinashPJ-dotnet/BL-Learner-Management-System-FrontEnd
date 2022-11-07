@@ -16,12 +16,13 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "./RecruitmentCard.css";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
-import DisplayCard from "../../DisplayCard/DisplayCard";
+
 import { useNavigate } from "react-router-dom";
 import {
   getNotRespondedCount,
   getNotRespondedList,
 } from "../../../services/RecruitmentService";
+import RecruitmentDisplayCard from "../../DisplayCard/RecruitmentDisplayCard";
 
 const theme = createTheme({
   components: {
@@ -208,7 +209,7 @@ function RecruitmentCard(props) {
         </AntTabs>
 
         <ThemeProvider theme={avatarTheme}>
-          <div className="detailCardDiv">
+          <div className="detailCardDivR">
             <Card className="detailsCard" onClick={handleClick}>
               <Avatar src="/broken-image.jpg" />
               <div className="cardContent">
@@ -246,7 +247,7 @@ function RecruitmentCard(props) {
               anchorEl={anchorEl}
               onClose={handleClose}
             >
-              <DisplayCard status="pending" />
+              <RecruitmentDisplayCard status="pending" />
             </Popover>
 
             <Card className="detailsCard" onClick={handleClick}>
@@ -283,7 +284,7 @@ function RecruitmentCard(props) {
               anchorEl={anchorEl}
               onClose={handleClose}
             >
-              <DisplayCard />
+              <RecruitmentDisplayCard />
             </Popover>
 
             <Card className="detailsCard" onClick={handleClick}>
@@ -319,7 +320,7 @@ function RecruitmentCard(props) {
               anchorEl={anchorEl}
               onClose={handleClose}
             >
-              <DisplayCard />
+              <RecruitmentDisplayCard />
             </Popover>
           </div>
         </ThemeProvider>
