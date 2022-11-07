@@ -1,5 +1,6 @@
-import React from "react";
+
 import PhoneIcon from "@mui/icons-material/Phone";
+
 import MailIcon from "@mui/icons-material/Mail";
 import "./DisplayCard.css";
 import {
@@ -13,6 +14,9 @@ import {
   TableBody,
   Table,
 } from "@mui/material";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { getNotRespondedList } from "../../services/RecruitmentService";
+
 
 const phoneIconTheme = createTheme({
   components: {
@@ -62,6 +66,7 @@ const avatarTheme = createTheme({
         },
       },
     },
+
     MuiTableCell: {
       styleOverrides: {
         root: {
@@ -90,13 +95,77 @@ const avatarTheme = createTheme({
 });
 
 function DisplayCard(props) {
+  const[list,setList]= useState([]);
+  const[id,setId]= useState('');
+ 
+  // console.log(props.status);
+  // setList(props.name);
+
+  // if(!mounted){
+    
+  //  if(props.status==="pending"){
+  //   setStatus("pending");
+  //  }
+ 
+  // }
+  // {props.status ?
+//  setId(props.status)
+//   // useMemo(() =>{
+//     if (id==="pending") {
+//     getNotRespondedList("pending")
+//     .then((res) => {
+//       setList(res.data.data[0]);
+//       // setId(res.data.data[0].id);
+//       // console.log(list);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+//     }
+  // },[id])
+  
+  console.log(props.status);
+
+ 
+  useEffect(() => {
+  //   // let status = "pending";
+    
+    getNotRespondedList(props.status)
+      .then((res) => {
+        // console.log(res.data.data[0]);
+        setList(res.data.data[0]);
+        console.log(list);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    
+    },[list,props.status]);
+  
+
+
+  // useEffect(() => {
+  //   if (Math.random() > 0.5) {
+  //     setList(props.name);
+  //   }
+    
+  // },[props]);
+  // console.log(list);
+  // const data = list || {};
+  // console.log(id);
+ 
+ 
   return (
+   
     <div>
+      
+      {/* {list.map((candidate, index) => {
+      return (  */}
       <ThemeProvider theme={avatarTheme}>
         <div className="displayDetailCardDiv">
           <Avatar src="/broken-image.jpg" />
           <CardContent className="displayCardContent">
-            <p className="candidateName">Swati Shinde</p>
+            <p className="candidateName">list.id</p>
             <ThemeProvider theme={phoneIconTheme}>
               <div className="phoneDiv">
                 <div className="phoneDiv">
@@ -216,6 +285,8 @@ function DisplayCard(props) {
           </Table>
         </div>
       </ThemeProvider>
+        //    );
+        // })}     
     </div>
   );
 }

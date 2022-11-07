@@ -25,6 +25,7 @@ import { treeItemClasses } from "@mui/lab/TreeItem";
 import SwapCallsIcon from "@mui/icons-material/SwapCalls";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SubdirectoryArrowRightIcon from "@mui/icons-material/SubdirectoryArrowRight";
+import { useNavigate  } from "react-router-dom";
 
 const Theme = createTheme({
   components: {
@@ -142,6 +143,16 @@ StyledTreeItem.propTypes = {
 };
 
 function AppDrawer(props) {
+  // -----------------------------------------------------
+  let navigate = useNavigate();
+
+  const handleClick = (event, node) => {
+    console.log('nodeId: ', node); 
+    if(node==='2'){
+      navigate("/recruitment");
+    }
+  };
+// ---------------------------------------------------------
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -179,18 +190,24 @@ function AppDrawer(props) {
           defaultExpandIcon={<ArrowRightIcon />}
           defaultEndIcon={<div style={{ width: 24 }} />}
           sx={{ height: 264, flexGrow: 1, maxWidth: 400, overflowY: "auto" }}
+          onNodeSelect={handleClick}
+          onSel
         >
+          
           <StyledTreeItem
             nodeId="1"
             labelText="Dashboard"
             labelIcon={ComputerOutlinedIcon}
             color="#7F961E"
+            // disabled={true}
           />
           <StyledTreeItem
+          value="1"
             nodeId="2"
             labelText="Recruitment"
             labelIcon={ZoomInOutlinedIcon}
             color="#7F961E"
+            
           />
           <StyledTreeItem
             nodeId="3"

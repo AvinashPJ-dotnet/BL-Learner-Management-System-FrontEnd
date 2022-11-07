@@ -9,7 +9,7 @@ import {
   Avatar,
   Popover,
 } from "@mui/material";
-import React from "react";
+import React, {  useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -17,6 +17,11 @@ import "./RecruitmentCard.css";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
 import DisplayCard from "../../DisplayCard/DisplayCard";
+import { useNavigate } from "react-router-dom";
+import {
+  getNotRespondedCount,
+  getNotRespondedList,
+} from "../../../services/RecruitmentService";
 
 const theme = createTheme({
   components: {
@@ -39,16 +44,15 @@ const theme = createTheme({
           top: "22px",
           right: "-14px",
           marginRight: "15px",
-          backgroundColor:"#7F961E"
+          backgroundColor: "#7F961E",
         },
-        root:{
+        root: {
           marginRight: "73px",
-        }
+        },
       },
     },
   },
 });
-
 
 const iconTheme = createTheme({
   components: {
@@ -121,7 +125,7 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(
     [theme.breakpoints.up("sm")]: {
       minWidth: 0,
     },
-    fontSize:"17px",
+    fontSize: "17px",
     fontWeight: "550",
     marginRight: theme.spacing(1),
     marginLeft: theme.spacing(5),
@@ -152,13 +156,13 @@ const AntTab = styled((props) => <Tab disableRipple {...props} />)(
 );
 
 function RecruitmentCard(props) {
-  const [value, setValue] = React.useState(0);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [value, setValue] = useState(0);
+  const [anchorEl, setAnchorEl] = useState(null);
+  let navigate = useNavigate();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -168,8 +172,15 @@ function RecruitmentCard(props) {
     setAnchorEl(null);
   };
 
+  const handleAddCandidate = () => {
+    navigate("/addcandidate");
+  };
+
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? "simple-popover" : undefined;
+  // const data = notRespondedList || {};
+  //       console.log(data);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="cardDiv">
@@ -183,122 +194,133 @@ function RecruitmentCard(props) {
               <DriveFolderUploadIcon />
             </div>
           </ThemeProvider>
-          <AddCircleIcon />
+          <AddCircleIcon onClick={handleAddCandidate} />
         </div>
 
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Didn't Respond" />
-          <Badge badgeContent={4} color="primary" />
+          <Badge badgeContent={props.notRespondedCount} color="primary" />
 
           <AntTab label="Accepted" />
-          <Badge badgeContent={4} color="primary" />
+          <Badge badgeContent={props.acceptedCount} color="primary" />
           <AntTab label="Rejected" />
-          <Badge badgeContent={4} color="primary" />
+          <Badge badgeContent={props.rejectedCount} color="primary" />
         </AntTabs>
 
         <ThemeProvider theme={avatarTheme}>
           <div className="detailCardDiv">
-          
             <Card className="detailsCard" onClick={handleClick}>
               <Avatar src="/broken-image.jpg" />
               <div className="cardContent">
-                <p className="name">Swati Shinde</p>
+                <p className="name">
+                  {props.notRespondedList.firstName}{" "}
+                  {props.notRespondedList.middleName}{" "}
+                  {props.notRespondedList.lastName}
+                </p>
                 <ThemeProvider theme={phoneIconTheme}>
                   <div className="phoneDiv">
                     <PhoneIcon />
-                    <p className="mobile">9876434567 </p>
+                    <p className="mobile">
+                      {props.notRespondedList.mobileNumber}{" "}
+                    </p>
                   </div>
                   <div className="phoneDiv">
                     <MailIcon />
-                    <p className="email">swati@gmail.com</p>
+                    <p className="email">{props.notRespondedList.emailId}</p>
                   </div>
                 </ThemeProvider>
               </div>
             </Card>
-            <Popover 
-            anchorOrigin={{
-              vertical: 'center',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-          >
-          <DisplayCard/>
-          </Popover> 
-          
-            <Card className="detailsCard" onClick={handleClick}>
-              <Avatar src="/broken-image.jpg" />
-              <div className="cardContent">
-                <p className="name">Swati Shinde</p>
-                <ThemeProvider theme={phoneIconTheme}>
-                  <div className="phoneDiv">
-                    <PhoneIcon />
-                    <p className="mobile">9876434567 </p>
-                  </div>
-                  <div className="phoneDiv">
-                    <MailIcon />
-                    <p className="email">swati@gmail.com</p>
-                  </div>
-                </ThemeProvider>
-              </div>
-            </Card>
-        
-            <Popover 
-            anchorOrigin={{
-              vertical: 'center',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-          >
-          <DisplayCard/>
-          </Popover> 
-      
+
+            <Popover
+              anchorOrigin={{
+                vertical: "center",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+            >
+              <DisplayCard status="pending" />
+            </Popover>
 
             <Card className="detailsCard" onClick={handleClick}>
               <Avatar src="/broken-image.jpg" />
               <div className="cardContent">
-                <p className="name">Swati Shinde</p>
+                <p className="name">
+                  {props.acceptedList.firstName} {props.acceptedList.middleName}{" "}
+                  {props.acceptedList.lastName}
+                </p>
                 <ThemeProvider theme={phoneIconTheme}>
                   <div className="phoneDiv">
                     <PhoneIcon />
-                    <p className="mobile">9876434567 </p>
+                    <p className="mobile">{props.acceptedList.mobileNumber} </p>
                   </div>
                   <div className="phoneDiv">
                     <MailIcon />
-                    <p className="email">swati@gmail.com</p>
+                    <p className="email">{props.acceptedList.emailId}</p>
                   </div>
                 </ThemeProvider>
               </div>
             </Card>
-            <Popover 
-            anchorOrigin={{
-              vertical: 'center',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-          >
-          <DisplayCard/>
-          </Popover> 
+
+            <Popover
+              anchorOrigin={{
+                vertical: "center",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+            >
+              <DisplayCard />
+            </Popover>
+
+            <Card className="detailsCard" onClick={handleClick}>
+              <Avatar src="/broken-image.jpg" />
+              <div className="cardContent">
+                <p className="name">
+                  {props.rejectedList.firstName} {props.rejectedList.middleName}{" "}
+                  {props.rejectedList.lastName}
+                </p>
+                <ThemeProvider theme={phoneIconTheme}>
+                  <div className="phoneDiv">
+                    <PhoneIcon />
+                    <p className="mobile">{props.rejectedList.mobileNumber}</p>
+                  </div>
+                  <div className="phoneDiv">
+                    <MailIcon />
+                    <p className="email">{props.rejectedList.emailId}</p>
+                  </div>
+                </ThemeProvider>
+              </div>
+            </Card>
+            <Popover
+              anchorOrigin={{
+                vertical: "center",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+            >
+              <DisplayCard />
+            </Popover>
           </div>
         </ThemeProvider>
       </div>
