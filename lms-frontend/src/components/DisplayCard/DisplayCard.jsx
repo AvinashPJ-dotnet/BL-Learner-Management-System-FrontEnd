@@ -12,7 +12,10 @@ import {
   TableHead,
   TableBody,
   Table,
+  Card,
 } from "@mui/material";
+import CandidateEdit from "../CandidateEditModel/CandidateEdit";
+import { useState } from "react";
 
 const phoneIconTheme = createTheme({
   components: {
@@ -89,30 +92,46 @@ const avatarTheme = createTheme({
   },
 });
 
+
+
 function DisplayCard(props) {
+  let isEditCandidateDialogClosed = true;
+  const [isEditCandidateDialogOpened, setIsEditCandidateDialogOpened] = useState(false);
+  const [anchorEle, setAnchorEle] = useState(null);
+
+  function handleEditCandidateDialog(event){
+    setAnchorEle(event.currentTarget);
+    setIsEditCandidateDialogOpened(true)
+  }
+
+
   return (
     <div>
       <ThemeProvider theme={avatarTheme}>
         <div className="displayDetailCardDiv">
-          <Avatar src="/broken-image.jpg" />
-          <CardContent className="displayCardContent">
-            <p className="candidateName">Swati Shinde</p>
-            <ThemeProvider theme={phoneIconTheme}>
-              <div className="phoneDiv">
+          <Card className="detailsCard" key={props.key} >
+            <Avatar src="/broken-image.jpg" />
+            <CardContent className="displayCardContent" onClick={handleEditCandidateDialog}>
+              <p className="candidateName">
+                {props.values.firstName}. {props.values.lastName}
+              </p>
+              <ThemeProvider theme={phoneIconTheme}>
                 <div className="phoneDiv">
-                  <PhoneIcon />
-                  <p className="mobileNo">9876434567 </p>
+                  <div className="phoneDiv">
+                    <PhoneIcon />
+                    <p className="mobileNo">{props.values.mobileNumber} </p>
+                  </div>
+                  <div className="phoneDiv">
+                    <MailIcon />
+                    <p className="emailId">{props.values.emailId}</p>
+                  </div>
                 </div>
-                <div className="phoneDiv">
-                  <MailIcon />
-                  <p className="emailId">swati@gmail.com</p>
-                </div>
-              </div>
-            </ThemeProvider>
-          </CardContent>
+              </ThemeProvider>
+              <CandidateEdit open={isEditCandidateDialogOpened} close={isEditCandidateDialogClosed} event={anchorEle}/>
+            </CardContent>
 
-          <Table sx={{ minWidth: 500 }} aria-label="simple table">
-            <TableHead>
+            {/* <Table sx={{ minWidth: 500 }} aria-label="simple table"> */}
+            {/* <TableHead>
               <TableRow>
                 <TableCell align="center" style={{ width: "76px" }} rowSpan={3}>
                   Hired City
@@ -147,9 +166,9 @@ function DisplayCard(props) {
                   Remarks
                 </TableCell>
               </TableRow>
-            </TableHead>
+            </TableHead> */}
 
-            <TableHead>
+            {/* <TableHead>
               <TableRow>
                 <TableCell
                   align="center"
@@ -185,18 +204,18 @@ function DisplayCard(props) {
                 <TableCell align="center">Communication</TableCell>
                 <TableCell align="center">Knowledge</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {/* {rows.map((row) => ( */}
-              <TableRow
+            </TableHead> */}
+            {/* <TableBody> */}
+            {/* {rows.map((row) => ( */}
+            {/* <TableRow
                 key="name"
                 sx={{
                   "&:last-child td, &:last-child th": {
                     border: "1px solid grey",
                   },
                 }}
-              >
-                <TableCell component="th" scope="rows" align="center">
+              > */}
+            {/* <TableCell component="th" scope="rows" align="center">
                   xxx
                 </TableCell>
                 <TableCell align="center">xxx</TableCell>
@@ -210,10 +229,11 @@ function DisplayCard(props) {
                 <TableCell align="center">xxx</TableCell>
                 <TableCell align="center">xxx</TableCell>
                 <TableCell align="center">xxx</TableCell>
-              </TableRow>
-              {/* ))} */}
-            </TableBody>
-          </Table>
+              </TableRow> */}
+
+            {/* </TableBody> */}
+            {/* </Table> */}
+          </Card>
         </div>
       </ThemeProvider>
     </div>
